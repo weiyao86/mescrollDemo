@@ -63,7 +63,9 @@ export default {
   },
   beforeRouteEnter (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteEnter不用写
     next(vm => {
+      
       if (vm.mescroll) {
+       
         // 恢复到之前设置的isBounce状态
         if (vm.mescroll.lastBounce != null) vm.mescroll.setBounce(vm.mescroll.lastBounce)
         // 滚动到之前列表的位置(注意:路由使用keep-alive才生效)

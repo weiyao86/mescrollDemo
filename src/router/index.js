@@ -11,35 +11,37 @@ import mescrollSwiperNav from '@/pages/base/mescroll-swiper-nav'
 Vue.use(Router)
 
 export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: home
-    }, {
-      path: '/listNews',
-      name: 'listNews',
-      component: listNews
-    }, {
-      path: '/mescrollOptions',
-      name: 'mescrollOptions',
-      component: mescrollOptions
-    }, {
-      path: '/listProducts',
-      name: 'listProducts',
-      component: listProducts
-    }, {
-      path: '/mescrollComponent',
-      name: 'mescrollComponent',
-      component: mescrollComponent
-    }, {
-      path: '/mescrollMore',
-      name: 'mescrollMore',
-      component: mescrollMore
-    }, {
-      path: '/mescrollSwiperNav',
-      name: 'mescrollSwiperNav',
-      component: mescrollSwiperNav
-    }
-  ]
+	routes: [{
+		path: '/',
+		name: 'home',
+		component: home
+	}, {
+		path: '/listNews',
+		name: 'listNews',
+		component: listNews
+	}, {
+		path: '/mescrollOptions',
+		name: 'mescrollOptions',
+		component: mescrollOptions
+	}, {
+		path: '/listProducts',
+		name: 'listProducts',
+		component: listProducts
+	}, {
+		path: '/mescrollComponent',
+		name: 'mescrollComponent',
+		component: mescrollComponent
+	}, {
+		path: '/mescrollMore',
+		name: 'mescrollMore',
+		component: mescrollMore
+	}, {
+		path: '/mescrollSwiperNav',
+		name: 'mescrollSwiperNav',
+		component: mescrollSwiperNav
+	}, {
+		path: '/test',
+		name: 'test',
+		component: (resolve => require(["@/pages/base/test.vue"], resolve))
+	}]
 })

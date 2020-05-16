@@ -36,7 +36,7 @@ export default {
   },
   watch:{
     $route:function(to,from){
-       console.log(arguments)
+       // alert('roter')
     }
   },
   mounted () {
@@ -63,7 +63,11 @@ export default {
   beforeRouteEnter (to, from, next) { // 如果没有配置回到顶部按钮或isBounce,则beforeRouteEnter不用写
 
     next(vm => {
+      // debugger;
+
       if (vm.mescroll) {
+         // vm.mescroll.resetUpScroll(true);
+       
         // 恢复到之前设置的isBounce状态
         if (vm.mescroll.lastBounce != null) vm.mescroll.setBounce(vm.mescroll.lastBounce)
         // 滚动到之前列表的位置(注意:路由使用keep-alive才生效)
@@ -88,6 +92,7 @@ export default {
   methods: {
     /* 下拉刷新的回调 */
     downCallback () {
+
       console.log('this.mescroll.version=' + this.mescroll.version);
       // 联网加载数据
       this.getListDataFromNet(0, 1, (data) => {
@@ -105,6 +110,7 @@ export default {
 
     // 上拉回调 page = {num:1, size:10}; num:当前页 ,默认从1开始; size:每页数据条数,默认10
     upCallback (page) {
+      
       // 联网加载数据
       this.getListDataFromNet(page.num, page.size, (curPageData) => {
         // 添加列表数据
@@ -127,6 +133,7 @@ export default {
      实际项目以您服务器接口返回的数据为准,无需本地处理分页.
     * */
     getListDataFromNet (pageNum, pageSize, successCallback, errorCallback) {
+    
       // 延时一秒,模拟联网
       setTimeout(function () {
         try {
