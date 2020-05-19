@@ -8,6 +8,8 @@
              <label>{{item}}</label>
         </div>
     </div> -->
+
+    {{$store.state.title}}===========>
     <ul>
         <tree v-for="(item,idx) in Products" :root="item" :depth=0 :key="idx">
             <template v-slot='slotProps'>
@@ -23,6 +25,18 @@
     import tree from "@/components/tree"
     export default {
         name: "test",
+        asyncData({store,route}){
+            // debugger;
+            console.log(route)
+            // store.dispatch('changeTest',{
+            //   title:'来测试一波'
+            // });
+            // alert(store.state.title)
+            return new Promise((resolve,reject)=>{
+
+            setTimeout(()=>{resolve('i am!!! ');console.log('i am coming...');},5000);
+            });
+        },
         components: {
             tree
         },

@@ -23,7 +23,7 @@
             root:{type:Object},
             depth:Number
         },
-        data(){
+        data(){ 
             return {
                 count:1,
                 list:this.initData(this.root)

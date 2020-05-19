@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import home from '@/pages/home'
+import store from '@/store'
 import listNews from '@/pages/base/list-news'
 import mescrollOptions from '@/pages/base/mescroll-options'
 import listProducts from '@/pages/base/list-products'
@@ -10,7 +11,7 @@ import mescrollSwiperNav from '@/pages/base/mescroll-swiper-nav'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
 	routes: [{
 		path: '/',
 		name: 'home',
@@ -44,4 +45,40 @@ export default new Router({
 		name: 'test',
 		component: (resolve => require(["@/pages/base/test.vue"], resolve))
 	}]
-})
+});
+
+router.beforeResolve(function(to, from, next) {
+	// debugger;
+	let now = router.getMatchedComponents(to);
+	let prevent = router.getMatchedComponents(from);
+
+	let diff = false;
+	let actived = now.filter(function(item, i) {
+		return diff || (diff = (prevent[i] != item));
+	});
+
+	if (!actived.length) {
+		return next();
+	}
+
+	Vue.$vux.loading.show({
+		text: "Loading..."
+	});
+
+	Promise.all(actived.filter(function(item) {
+		return item.asyncData && (!item.asyncDataFetche || !to.meta.keepAlive);
+
+	}).map(async function(item) {
+		await item.asyncData({
+			store,
+			route: to
+		});
+		item.asyncDataFetche = true;
+	})).then(() => {
+		next();
+		Vue.$vux.loading.hide();
+	});
+
+});
+
+export default router;
