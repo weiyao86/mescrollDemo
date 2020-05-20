@@ -44,6 +44,10 @@ let router = new Router({
 		path: '/test',
 		name: 'test',
 		component: (resolve => require(["@/pages/base/test.vue"], resolve))
+	}, {
+		path: '/marquee',
+		name: 'marquee',
+		component: (resolve => require(["@/components/marquee.vue"], resolve))
 	}]
 });
 
